@@ -47,5 +47,5 @@ app.post('/games', function (req, res) {
 })
 
 app.listen(port, function () {
-    console.log('app is running linux is best...')
+    console.log('app is running...')
 });
