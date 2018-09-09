@@ -6,4 +6,5 @@ This application was build using NodeJS, JavaScript, Ionic Framework, Angular Fr
 
 This application can be run as an iPhone/Android application or as a regular web application.  
 
-Currently, this project is not working properly due to IGDB updating their API since the time of development. 
+Currently, this project is not working properly due to IGDB updating their API since the time of development.  
+Also, some of the dependencies are outdated and have security vulnerabilities, but a simple update will fix that. 
