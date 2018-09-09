@@ -1,0 +1,63 @@
+<ion-content parallax-header>
+
+  <div class="header-image">
+    <ion-slides [options]="slideOptions">
+
+
+
+      <ion-slide *ngFor="let image of game?.screenshots">
+        <img [src]=" makeUrl(image)" />
+
+      </ion-slide>
+
+
+      <ion-slide *ngFor="let video of game?.videos">
+        <div style="width: 100%">
+          <youtube-player [width]="350" [height]="180" *ngIf="game.videos" [playerId]='"player"' [videoId]='video.video_id'> </youtube-player>
+        </div>
+      </ion-slide>
+
+    </ion-slides>
+    <!--<img *ngIf="game.cover" src="//images.igdb.com/igdb/image/upload/t_screenshot_med_2x/{{game?.screenshots[0].cloudinary_id}}.png"/>-->
+  </div>
+
+  <div class="main-content">
+    <ion-grid>
+      <ion-row class="fav-border">
+        <ion-col col-7>
+          <favorite [game]="game" [showRating]="true"> </favorite>
+        </ion-col>
+        <ion-col col-5>
+          <rating [itemId]='test'></rating>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-12>
+          <h5>{{game.name}}</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="game.storyline">
+        <ion-col col-12>
+          <p>{{game.storyline}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <p *ngIf="!game.storyline">{{game.summary}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <youtube-player [width]="350" [height]="180" *ngIf="game.videos" [playerId]='"player"' [videoId]='game.videos[0].video_id'></youtube-player>
+        </ion-col>
+      </ion-row>
+          <button ion-button color="dark" round icon-left (click)="openBrowser(game.name)">
+      <ion-icon name='logo-steam' is-active="false"></ion-icon>
+     Buy from G2A
+    </button>
+    </ion-grid>
+
+  </div>
+
+</ion-content>

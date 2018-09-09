@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>News</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <masonry [useImagesLoaded]="true">
+    <masonry-brick class="brick" *ngFor="let news of newsItems | async">
+      
+
+        <div (click)="openBrowser(news.url)" *ngIf="news.image" class="card-background-page">
+          <ion-card>
+            <img src="{{news.image}}" />
+            <div class="card-title">
+              <span>{{news.title}}</span></div>
+          </ion-card>
+        </div>
+
+
+     
+    </masonry-brick>
+  </masonry>
+
+</ion-content>

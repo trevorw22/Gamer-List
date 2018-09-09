@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar>
+
+    <ion-searchbar (keyup)="searchTerms.next($event.target.value)"></ion-searchbar>
+    <ion-buttons start>
+      <!--<button ion-button icon-only (click)="openModal()">
+        <ion-icon name="search"></ion-icon>
+      </button>-->
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding>
+    <ion-segment [(ngModel)]="collectionType">
+      <ion-segment-button (click)="changeType.next('Favorites')" value="Favorites">
+        Favorites
+      </ion-segment-button>
+      <ion-segment-button (click)="changeType.next('Played')" value="Played">
+        Played
+      </ion-segment-button>
+      <ion-segment-button (click)="changeType.next('Discover')" value="Discover">
+        Discover
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="collectionType">
+    <div *ngSwitchCase="'Favorites'">
+      <masonry [useImagesLoaded]="true">
+        <masonry-brick class="brick" *ngFor="let game of games">
+
+
+          <div class="card-background-page">
+            <ion-card>
+              <img *ngIf="game?.cloudinary_id" src="//images.igdb.com/igdb/image/upload/{{game?.cloudinary_id}}.png?fields=screenshot_big_fit"
+              />
+              <div class="card-title cover-txt">
+                <span>{{game?.name}}</span></div>
+            </ion-card>
+          </div>
+        </masonry-brick>
+      </masonry>
+      <!--
+          <masonry [useImagesLoaded]="true">
+       <masonry-brick class="brick" *ngFor="let game of games">
+      <div>
+           <ion-card>
+            <img *ngIf="game?.cloudinary_id" src="//images.igdb.com/igdb/image/upload/{{game?.cloudinary_id}}.png?fields=screenshot_big_fit"
+            />
+            <ion-card-content>
+              <ion-card-title  (click)="navigate(game)">
+                {{game?.name}}
+              </ion-card-title>
+            </ion-card-content>
+          </ion-card>
+      </div>
+       </masonry-brick>
+     </masonry>-->
+    </div>
+
+    <div *ngSwitchCase="'Played'">
+      <masonry [useImagesLoaded]="true">
+        <masonry-brick class="brick" *ngFor="let game of games">
+          <div>
+            <ion-card>
+              <img *ngIf="game?.cloudinary_id" src="//images.igdb.com/igdb/image/upload/{{game?.cloudinary_id}}.png?fields=screenshot_big_fit"
+              />
+              <ion-card-content>
+                <ion-card-title>
+                  {{game?.name}}
+                </ion-card-title>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </masonry-brick>
+      </masonry>
+    </div>
+
+    <div *ngSwitchCase="'Discover'">
+
+      <ion-card *ngFor="let game of discoverGames">
+        <img *ngIf="game.cover" src="//images.igdb.com/igdb/image/upload/{{game.cover?.cloudinary_id}}.png?fields=screenshot_big_fit"
+        />
+        <ion-card-content>
+          <ion-card-title (click)="navigate(game)">
+            {{ game.name }}
+          </ion-card-title>
+          <p>
+            {{game.summary}}
+          </p>
+          <p>
+            <favorite [game]="game"></favorite>
+          </p>
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+  </div>
+</ion-content>

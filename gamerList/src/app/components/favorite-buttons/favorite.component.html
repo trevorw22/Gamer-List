@@ -1,0 +1,23 @@
+<ion-row class="action">
+  <ion-col>
+    <button ion-button icon-left clear small (click)="addToFavorites(game)">
+        <ion-icon *ngIf="!checkExistingGame(game)"name="heart-outline"></ion-icon>
+                <ion-icon *ngIf="checkExistingGame(game)"name="heart" class="fav"></ion-icon>
+        <div>Favorites</div>
+      </button>
+  </ion-col>
+  <ion-col>
+    <button ion-button icon-left clear small (click)="addToPlayed(game)">
+        <ion-icon *ngIf="!checkPlayExistingGame(game)" name="ios-game-controller-a-outline"></ion-icon>
+                        <ion-icon *ngIf="checkPlayExistingGame(game)" name="ios-game-controller-a" class="fav"></ion-icon>
+        <div>Played</div>
+      </button>
+  </ion-col>
+  <ion-col center text-center *ngIf="!showRating && game.aggregated_rating">
+    <ion-note>
+      <!--{{ game.rating | exponentialRate}} /10-->
+      {{game.aggregated_rating | exponentialRate}} /10
+    </ion-note>
+  </ion-col>
+
+</ion-row>
